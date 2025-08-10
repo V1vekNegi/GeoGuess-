@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+ 
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import HOME from "./Pages/Home";
+import Learderboard from "./Pages/Leaderboard";
+ 
+import Nav from "./components/Nav";
+import SignUp from "./components/SignUp";
+import Game from "./Pages/Game";
 
 function App() {
+
+  const [signModal, setsignModal] = useState(false); 
+  const [start, setStart] =useState(false);
+  
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Nav onSignUpClick={() => setsignModal(true)}/>
+       { signModal && <SignUp onClose={() => setsignModal(false)} />}
+      <Routes>
+      
+        <Route path="/" element={<HOME />} />
+       
+        <Route path="/leaderboard" element={<Learderboard />} />
+       
+        <Route path="/game" element={<Game/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
