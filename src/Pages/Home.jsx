@@ -5,10 +5,23 @@ import { UserContext } from "../context/UserContext";
 import Leadmini from "../components/Leadmini";
 import MyShape from "../assets/MyShape.svg";
 
+import img1 from "../assets/img1.png";
+import img2 from "../assets/img2.png";
+import img3 from "../assets/img3.png";
+import img4 from "../assets/img4.png";
+import img5 from "../assets/img5.png";
+import img6 from "../assets/img6.gif";
+import sparkles from "../assets/sparkes.png";
+
+
 import { Canvas } from "@react-three/fiber";
 import Earth from "../components/Earth";
-import Cartoon from "../assets/cartoon.png"
+import Cartoon from "../assets/cartoon.png";
 import axios from "axios";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const Home = () => {
   const [fastSpin, setFastSpin] = useState(false);
@@ -18,8 +31,15 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const panelRef = useRef(null);
   const [feedback, setFeedback] = useState("");
-  const [submitted, setSubmitted]= useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const containerRef = useRef(null);
+  const img1Ref = useRef(null);
+  const img2Ref = useRef(null);
+  const img3Ref = useRef(null);
+  const img4Ref = useRef(null);
+  const img5Ref = useRef(null);
+  const img6Ref = useRef(null);
 
   const { user } = useContext(UserContext);
 
@@ -51,29 +71,50 @@ const Home = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if(!user){
-      setError("Please login to submit Feedback!");
-    }
-    try{
-    const response = await axios.post("http://localhost:5000/feedback", {
-      username: user || "anonymous",
-      comments: feedback
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top  top",
+        end: "bottom  center",
+        scrub: true,
+      },
     });
 
-    if(response.ok){
-      setSubmitted(true);
+    tl.to([
+    img1Ref.current,
+    img2Ref.current,
+    img3Ref.current,
+    img4Ref.current,
+    img5Ref.current,
+    img6Ref.current
+  ], {y: -100, duration: 1});
+}, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!user) {
+      setError("Please login to submit Feedback!");
     }
-    
-  } catch(err){
-    console.log(err);
+    try {
+      const response = await axios.post("http://localhost:5000/feedback", {
+        username: user || "anonymous",
+        comments: feedback,
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.log(err);
       if (err.response && err.response.data && err.response.data.error) {
         setError(err.response.data.error);
       } else {
         setError(" Something went failed");
       }
-  }
+    }
   };
 
   return (
@@ -172,8 +213,10 @@ const Home = () => {
             </button>
           </div>
 
-          <div className="absolute bottom-2 w-[20%] h-[25%] items-center flex flex-col justify-center right-4 bg-gradient-to-br from-white/20 to-black/10 backdrop-blur-sm border border-white/50 text-white  rounded-2xl shadow-xl space-y-3 text-xl"
-           style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <div
+            className="absolute bottom-2 w-[20%] h-[25%] items-center flex flex-col justify-center right-4 bg-gradient-to-br from-white/20 to-black/10 backdrop-blur-sm border border-white/50 text-white  rounded-2xl shadow-xl space-y-3 text-xl"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
             <div className="flex w-1/2 items-center gap-2">
               <i class="fa-solid fa-earth-americas"></i>
               <span>195 countries</span>
@@ -220,33 +263,84 @@ const Home = () => {
           </svg>
         </div>
 
-        <div>
+        <div ref={containerRef} className="relative w-screen h-screen bg-[#F5F5F5]">
+          <div className="absolute flex justify-center gap-130 w-full h-full ">
+            <img className="w-[500px] h-[500px] " src={sparkles} alt="" />
+            <img className=" w-[500px] h-[500px] " src={sparkles} alt="" />
+          </div>
+          <img ref={img1Ref}
+            className="absolute  left-50 top-150 w-[225px]  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
+            src={img1}
+            alt=""
+          />
+          <img ref={img2Ref}
+            className="absolute right-50  rotate-[30deg]  transition-transform duration-500 hover:rotate-[50deg] hover:scale-110 drop-shadow-2xl "
+            src={img2}
+            alt=""
+          />
+          <img ref={img3Ref}
+            className="absolute right-30 top-120 w-[150px] z-5  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
+            src={img3}
+            alt=""
+          />
+          <img ref={img4Ref}
+            className="absolute right-50 top-140 w-[150px] z-10  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
+            src={img4}
+            alt=""
+          />
+          <img ref={img5Ref}
+            className="absolute top-100 left-30  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
+            src={img5}
+            alt=""
+          />
+          <img ref={img6Ref}
+            className="absolute left-30 top-30 w-[225px] -rotate-[25deg]  transition-transform duration-500 hover:rotate-[0deg] drop-shadow-2xl "
+            src={img6}
+            alt=""
+          />
+
           <Leadmini />
         </div>
 
-        <footer className="bg-gray-200 text-black text-sm p-6 text-center shadow-inner "
-         style={{ fontFamily: "'Poppins', sans-serif" }}>
-        <div className="absolute left-100 drop-shadow-2xl w-[300px]">
-          <img src={Cartoon} alt="" />
-        </div>
-          {!submitted ? (<form
-            onSubmit={handleSubmit}
-            className="mt-4 space-y-2 max-w-md mx-auto"
-          >
-            <h1 className="text-2xl font-bold font-sans"  style={{ fontFamily: "'Poppins', sans-serif" }}>FEEDBACK</h1>
-            <textarea
-              className="w-full h-30 p-2 rounded-lg border-2 border-purple-500 focus:outline-none hover:border-purple-700"
-              placeholder="Any feedbacks on the game.."
-              value={feedback}
-              onChange={(e) => {
-                setFeedback(e.target.value);
-              }}
-            />
-        {error && <div className="text-red-500 text-sm">{error}</div>}
-            <button type="submit" className="bg-gradient-to-r from-purple-700 to-purple-400 shadow-2xl rounded-md px-2 py-1 text-white cursor-pointer hover:scale-105 transition-all duration-200 ease-in-out active:scale-95 active:translate-y-0.5">
-              Submit
-            </button>
-          </form>): (<div className="text-green-500 font-semibold mt-4">Thanks for your feedback!</div>)}
+        <footer
+          className="bg-gray-200 text-black text-sm p-6 text-center shadow-inner "
+          style={{ fontFamily: "'Poppins', sans-serif" }}
+        >
+          <div className="absolute left-100 drop-shadow-2xl w-[300px]">
+            <img src={Cartoon} alt="" />
+          </div>
+          {!submitted ? (
+            <form
+              onSubmit={handleSubmit}
+              className="mt-4 space-y-2 max-w-md mx-auto"
+            >
+              <h1
+                className="text-2xl font-bold font-sans"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                FEEDBACK
+              </h1>
+              <textarea
+                className="w-full h-30 p-2 rounded-lg border-2 border-purple-500 focus:outline-none hover:border-purple-700"
+                placeholder="Any feedbacks on the game.."
+                value={feedback}
+                onChange={(e) => {
+                  setFeedback(e.target.value);
+                }}
+              />
+              {error && <div className="text-red-500 text-sm">{error}</div>}
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-purple-700 to-purple-400 shadow-2xl rounded-md px-2 py-1 text-white cursor-pointer hover:scale-105 transition-all duration-200 ease-in-out active:scale-95 active:translate-y-0.5"
+              >
+                Submit
+              </button>
+            </form>
+          ) : (
+            <div className="text-green-500 font-semibold mt-4">
+              Thanks for your feedback!
+            </div>
+          )}
           <div className="text-2xl font-bold mb-2 flex justify-center items-center gap-2 mt-5">
             <span className="tracking-wider">GeoGuess</span> | © 2025 VivekNegi
           </div>
