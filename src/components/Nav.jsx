@@ -73,7 +73,7 @@ const Nav = ({ onSignUpClick }) => {
             <img src={avatar} alt="img" className="w-10 h-10 rounded-full" />
           ) : (
             <button
-              className=" cursor-pointer bg-white text-purple-700 font-extrabold text-sm px-3 py-2 rounded-full border-4 hover:border-1 shadow-[0_6px_0_#4b0082] hover:bg-[#4b0082] hover:text-white hover:-translate-y-1 active:translate-y-1 active:shadow-[0_3px_0_#4b0082] transition-all duration-300 ease-out"
+              className=" bg-gradient-to-r from-white to-white shadow-2xl rounded-full border-2 border-purple-600 px-4 py-1.5 text-purple-700 text-md font-semibold cursor-pointer hover:scale-105 hover:from-purple-600 hover:to-purple-400 hover:text-white transition-all duration-300 ease-in-out active:scale-95 active:translate-y-1.5"
               onClick={onSignUpClick}
                style={{ fontFamily: "'Poppins', sans-serif" }}
             >

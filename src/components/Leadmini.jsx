@@ -11,10 +11,10 @@ const Leadmini = () => {
   return (
     <div className="w-screen flex justify-center h-screen bg-white py-10 px-4">
       <div className="absolute w-full text-center mb-2 ">
-        <h1 className="text-5xl font-bold text-[#471a83]"
+        <h1 className="text-5xl hover:scale-110 transition-transform duration-300  font-bold text-[#471a83]"
          style={{ fontFamily: "'Poppins', sans-serif" }}
          >LeaderBoard</h1>
-        <p className="text-xl text-purple-500 mb-10"
+        <p className="text-3xl hover:scale-110 transition-transform duration-300  text-purple-500 mb-10"
          style={{ fontFamily: "'Poppins', sans-serif" }}
          >Top players</p>
       </div>

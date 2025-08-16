@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
   const [topPlayers, setTopPlayers] = useState([]);
 useEffect(() => {  const fetchTopPlayers = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/leaderboard");
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`);
         setTopPlayers(res.data.slice(0, 3)); // only top 3
       } catch (error) {
         console.error("Failed to fetch top players:", error);

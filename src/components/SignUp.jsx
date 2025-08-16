@@ -28,7 +28,7 @@ const SignUp = ({ onClose }) => {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/auth/${islogin ? "login" : "signup"}`,
+        `${process.env.REACT_APP_BACKEND_URL}/auth/${islogin ? "login" : "signup"}`,
         formData
       );
 
@@ -131,13 +131,7 @@ const SignUp = ({ onClose }) => {
               />
             )}
 
-            {islogin && (
-              <div className="text-right">
-                <p className="text-purple-600 hover:underline hover:text-white">
-                  Forget Password
-                </p>
-              </div>
-            )}
+             
 
             {error && <p className="text-red-500 text-sm">{error}</p>}
 

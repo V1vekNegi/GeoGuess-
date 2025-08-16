@@ -144,9 +144,9 @@ const Earth = ({ fastSpin = false, move = false, isBouncing = false }) => {
             displacementScale={0.07}
             roughness={0.1}
             flatShading={false}
-            color="#3cb9fc"
+            color="#1E90FF"
             emissiveMap={earthmap}
-            emissive="#6cd84e"
+            emissive="#3CB371"
             emissiveIntensity={1}
           />
         </mesh>
@@ -154,13 +154,13 @@ const Earth = ({ fastSpin = false, move = false, isBouncing = false }) => {
         {/* Clouds */}
         <group ref={cloudsGroupRef}>
           {/* Now these will be your imported 3D cloud models! */}
-          <Cloud basePosition={[0.8, 0.7, 2.05]} baseScale={0.5} />
-          <Cloud basePosition={[-2.4, 1.0, -2.05]} baseScale={1.2} />
-          <Cloud basePosition={[0.8, 2.2, -2.05]} baseScale={0.8} />
-          <Cloud basePosition={[2.05, 0.0, 0.5]} baseScale={1.5} />{" "}
+          <Cloud basePosition={[0.8, 0.7, 1.05]} baseScale={[1.2, 0.4, 0.8]} />
+          <Cloud basePosition={[-2.4, 1.0, -1.05]} baseScale={1.2} />
+          <Cloud basePosition={[0.8, 2.2, -1.05]} baseScale={[1.2, 0.4, 0.8]} />
+          <Cloud basePosition={[2.05, 0.0, 0.5]} baseScale={[1.2, 0.4, 0.8]} />{" "}
           {/* Added more clouds */}
-          <Cloud basePosition={[-1.5, -1.8, 0.0]} baseScale={0.9} />
-          <Cloud basePosition={[0.0, 1.5, 2.05]} baseScale={1.1} />
+          <Cloud basePosition={[-1.5, -1.8, 0.3]} baseScale={[1.2, 0.4, 0.8]} />
+          <Cloud basePosition={[0.0, 1.5, 2.05]} baseScale={0.9} />
           {/* Add more Cloud components as needed */}
         </group>
 

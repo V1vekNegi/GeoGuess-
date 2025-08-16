@@ -12,7 +12,7 @@ export default function Leaderboard() {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/leaderboard"); // Adjust URL as needed
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/leaderboard`); // Adjust URL as needed
         setLeaderboard(res.data);
       } catch (error) {
         console.error("Failed to fetch leaderboard:", error);

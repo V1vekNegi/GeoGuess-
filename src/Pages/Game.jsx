@@ -23,7 +23,7 @@ const Game = () => {
 
   const fetchCountry = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/countries");
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/countries`);
       console.log("Country response:", response.data);
       setCountry(response.data);
       setTriesLeft(3);
@@ -43,7 +43,7 @@ const Game = () => {
   const handleGuess = async () => {
     if (!country || !userAnswer.trim()) return;
 
-    const res = await axios.post("http://localhost:5000/score/submit", {
+    const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/score/submit`, {
       userAnswer,
       correctAnswer: country.name,
       triesUsed: 3 - triesLeft,
@@ -102,7 +102,7 @@ const Game = () => {
     if (user) {
       console.log("Updating score for user:", user, "with score:", score);
       // Update score for logged-in user
-      await axios.post("http://localhost:5000/score/update", {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/score/update`, {
         username: user,
         newScore: score,
       });
@@ -155,7 +155,7 @@ const Game = () => {
 
           <div className="w-96 h-96 bg-white rounded-xl p-6 shadow-2xl mb-6 flex items-center justify-center">
             <img
-              src={`http://localhost:5000${country.outline}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}${country.outline}`}
               alt=" "
               className="w-full h-full object-contain"
             />

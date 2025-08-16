@@ -3,16 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
 import Leadmini from "../components/Leadmini";
-import MyShape from "../assets/MyShape.svg";
 
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
-import img3 from "../assets/img3.png";
+import img6 from "../assets/img6.png";
 import img4 from "../assets/img4.png";
 import img5 from "../assets/img5.png";
-import img6 from "../assets/img6.gif";
+import img3 from "../assets/img3.gif";
 import sparkles from "../assets/sparkes.png";
-
 
 import { Canvas } from "@react-three/fiber";
 import Earth from "../components/Earth";
@@ -21,7 +19,6 @@ import axios from "axios";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-
 
 const Home = () => {
   const [fastSpin, setFastSpin] = useState(false);
@@ -77,21 +74,32 @@ const Home = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top  top",
-        end: "bottom  center",
+        start: "center bottom",
+        end: "bottom center",
         scrub: true,
       },
     });
 
-    tl.to([
-    img1Ref.current,
-    img2Ref.current,
-    img3Ref.current,
-    img4Ref.current,
-    img5Ref.current,
-    img6Ref.current
-  ], {y: -100, duration: 1});
-}, []);
+    tl.to(
+      [
+        img1Ref.current,
+        img2Ref.current,
+        img3Ref.current,
+        img4Ref.current,
+        img5Ref.current,
+        img6Ref.current,
+      ],
+      {
+        y: -120,
+        scale: 1.1,
+        ease: "power3.out",
+        duration: 2,
+        x: (index) => {
+          return index % 2 === 0 ? -50 : 50;
+        },
+      }
+    );
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -99,7 +107,7 @@ const Home = () => {
       setError("Please login to submit Feedback!");
     }
     try {
-      const response = await axios.post("http://localhost:5000/feedback", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/feedback`, {
         username: user || "anonymous",
         comments: feedback,
       });
@@ -122,7 +130,11 @@ const Home = () => {
       {isOpen && (
         <div
           ref={panelRef}
-          className="absolute z-50 w-73 h-80 bottom-12 left-1 p-4 text-white bg-black/70 rounded-xl shadow-xl "
+          className="absolute z-50 w-73 h-80 bottom-8 left-1 p-4 text-white bg-black/70 rounded-xl shadow-xl animate-[popIn_0.5s_ease-out]"
+          style={{
+            fontFamily: "'Luckiest Guy', sans-serif",
+            WebkitTextStroke: "1px #1b1b4d",
+          }}
         >
           <h3 className="font-semibold mb-2 text-xl">
             <i className="fa-solid fa-gamepad "></i> How to Play
@@ -142,13 +154,15 @@ const Home = () => {
           className={`flex relative overflow-hidden bg-[radial-gradient(circle_at_center,_#fef08a,_#FDD637,_#f4ad1c)] min-h-screen w-screen z-0  `}
         >
           <div
-            className={`absolute w-screen h-screen inset-0 bg-black ${
+            className={`fixed w-screen min-h-screen inset-0 bg-black ${
               fadeOut ? " opacity-80  " : "opacity-0"
             } z-30 transition-opacity duration-3000 pointer-events-none`}
           ></div>
-          <div>logo</div>
+          <div className=" absolute w-[5%] hover:scale-110 duration-300 transition transform   ">
+            <img src={`favicon.png`} alt="" />
+          </div>
           <div
-            className={`absolute  w-[75%] right-0 h-screen  rounded-full pointer-events-none ${
+            className={`absolute w-[75%] -right-20 h-screen  rounded-full pointer-events-none ${
               fadeOut ? " z-40  " : " z-10   "
             } `}
           >
@@ -171,9 +185,9 @@ const Home = () => {
           <div class="absolute w-[1500px] h-[1500px] rounded-full border-160 border-white/30 top-1/3 left-1/4 -translate-x-[44%] -translate-y-[45%] -z-20"></div>
           <div class="absolute w-[2000px] h-[2000px] rounded-full border-180 border-white/30 top-1/3 left-1/4 -translate-x-[40%] -translate-y-[45%] -z-20"></div>
 
-          <div className=" mx-60 my-15 font-sans font-bold flex flex-col w-1/4 h-[700px] z-20 justify-center items-center">
+          <div className=" mx-60 my-5 font-sans font-bold flex flex-col w-1/4 h-[700px] z-20 justify-center items-center">
             <h1
-              className=" right-0 h-40 text-[200px] font-extrabold tracking-wide text-yellow-300 drop-shadow-[9px_7px_0_#1b1b4d] uppercase animate-[popIn_0.5s_ease-out] "
+              className=" h-53 text-[250px] font-extrabold tracking-wide hover:rotate-[-5deg] text-yellow-300 drop-shadow-[9px_7px_0_#1b1b4d] uppercase animate-[popIn_0.5s_ease-out] transition transform hover:scale-110 duration-300"
               style={{
                 fontFamily: "'Luckiest Guy', sans-serif",
                 WebkitTextStroke: "1px #1b1b4d",
@@ -182,7 +196,7 @@ const Home = () => {
               GEO
             </h1>
             <h1
-              className="font-[Luckiest Guy] h-58 text-[190px] text-gray-100 drop-shadow-[9px_7px_0_#1b1b4d] uppercase tracking-wide animate-[popIn_0.9s_ease-out]"
+              className=" font-[Luckiest Guy] h-50 text-[220px] text-gray-100 drop-shadow-[9px_7px_0_#1b1b4d] uppercase tracking-wide animate-[popIn_0.9s_ease-out] transition transform hover:scale-110 duration-300"
               style={{
                 fontFamily: "'Luckiest Guy', sans-serif",
                 WebkitTextStroke: "1px #1b1b4d",
@@ -190,7 +204,7 @@ const Home = () => {
             >
               GUESS
             </h1>
-            <div className=" flex items-center mt-10 ">
+            <div className=" flex items-center mt-25 ">
               <i
                 className="fa-solid fa-circle-info fa-lg hover:scale-125 transform transition duration-300 cursor-pointer"
                 onClick={() => {
@@ -263,39 +277,48 @@ const Home = () => {
           </svg>
         </div>
 
-        <div ref={containerRef} className="relative w-screen h-screen bg-[#F5F5F5]">
+        <div
+          ref={containerRef}
+          className="relative w-screen h-screen bg-[#F5F5F5]"
+        >
           <div className="absolute flex justify-center gap-130 w-full h-full ">
             <img className="w-[500px] h-[500px] " src={sparkles} alt="" />
             <img className=" w-[500px] h-[500px] " src={sparkles} alt="" />
           </div>
-          <img ref={img1Ref}
-            className="absolute  left-50 top-150 w-[225px]  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
+          <img
+            ref={img1Ref}
+            className="absolute  left-50 top-150 w-[225px] drop-shadow-2xl "
             src={img1}
             alt=""
           />
-          <img ref={img2Ref}
-            className="absolute right-50  rotate-[30deg]  transition-transform duration-500 hover:rotate-[50deg] hover:scale-110 drop-shadow-2xl "
+          <img
+            ref={img2Ref}
+            className="absolute right-60 rotate-[50deg] drop-shadow-2xl "
             src={img2}
             alt=""
           />
-          <img ref={img3Ref}
-            className="absolute right-30 top-120 w-[150px] z-5  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
-            src={img3}
+          <img
+            ref={img6Ref}
+            className="absolute right-45  top-120 w-[170px] z-5 drop-shadow-2xl "
+            src={img6}
             alt=""
           />
-          <img ref={img4Ref}
-            className="absolute right-50 top-140 w-[150px] z-10  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
+          <img
+            ref={img4Ref}
+            className="absolute right-70 top-140 w-[150px] z-10 drop-shadow-2xl "
             src={img4}
             alt=""
           />
-          <img ref={img5Ref}
-            className="absolute top-100 left-30  transition-transform duration-500 hover:scale-110 drop-shadow-2xl "
+          <img
+            ref={img5Ref}
+            className="absolute top-100 left-50 rotate-[10deg] drop-shadow-2xl "
             src={img5}
             alt=""
           />
-          <img ref={img6Ref}
-            className="absolute left-30 top-30 w-[225px] -rotate-[25deg]  transition-transform duration-500 hover:rotate-[0deg] drop-shadow-2xl "
-            src={img6}
+          <img
+            ref={img3Ref}
+            className="absolute left-30 top-30 w-[225px] -rotate-[25deg] drop-shadow-2xl "
+            src={img3}
             alt=""
           />
 
