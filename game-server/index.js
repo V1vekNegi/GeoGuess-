@@ -10,7 +10,7 @@ const Feedbacks = require("./routes/feedback.js");
 require("dotenv").config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -25,6 +25,10 @@ mongoose
     console.log("connected to MongoDB");
   })
   .catch((err) => console.log(err));
+
+  app.get("/", (req, res) => {
+  res.send("Server is live 🚀");
+});
 
 app.use("/auth", authRoutes);
 app.use("/countries", countriesRoute);
