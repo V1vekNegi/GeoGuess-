@@ -107,10 +107,13 @@ const Home = () => {
       setError("Please login to submit Feedback!");
     }
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/feedback`, {
-        username: user || "anonymous",
-        comments: feedback,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/feedback`,
+        {
+          username: user || "anonymous",
+          comments: feedback,
+        }
+      );
 
       if (response.ok) {
         setSubmitted(true);
@@ -130,7 +133,7 @@ const Home = () => {
       {isOpen && (
         <div
           ref={panelRef}
-          className="absolute z-50 w-73 h-80 bottom-8 left-1 p-4 text-white bg-black/70 rounded-xl shadow-xl animate-[popIn_0.5s_ease-out]"
+          className="absolute z-50  md:w-73 max-w-md h-auto bottom-8 left-1 p-4 text-white bg-black/70 rounded-xl shadow-xl animate-[popIn_0.5s_ease-out]"
           style={{
             fontFamily: "'Luckiest Guy', sans-serif",
             WebkitTextStroke: "1px #1b1b4d",
@@ -149,20 +152,20 @@ const Home = () => {
         </div>
       )}
 
-      <div className="relative w-screen h-screen">
+      <div className="relative w-full min-h-screen">
         <div
-          className={`flex relative overflow-hidden bg-[radial-gradient(circle_at_center,_#fef08a,_#FDD637,_#f4ad1c)] min-h-screen w-screen z-0  `}
+          className={`flex relative overflow-hidden bg-[radial-gradient(circle_at_center,_#fef08a,_#FDD637,_#f4ad1c)] min-h-screen w-full z-0  `}
         >
           <div
-            className={`fixed w-screen min-h-screen inset-0 bg-black ${
+            className={`fixed w-full min-h-screen inset-0 bg-black ${
               fadeOut ? " opacity-80  " : "opacity-0"
             } z-30 transition-opacity duration-3000 pointer-events-none`}
           ></div>
-          <div className=" absolute w-[5%] hover:scale-110 duration-300 transition transform   ">
+          <div className=" absolute w-[10%] hover:scale-110 duration-300 transition transform   ">
             <img src={`favicon.png`} alt="" />
           </div>
           <div
-            className={`absolute w-[75%] -right-20 h-screen  rounded-full pointer-events-none ${
+            className={`absolute md:w-[75%] w-full lg:-right-20 h-screen rounded-full pointer-events-none ${
               fadeOut ? " z-40  " : " z-10   "
             } `}
           >
@@ -178,16 +181,16 @@ const Home = () => {
             }}
           ></div>
           */}
-          <div class="absolute w-[400px] h-[400px] rounded-full border-100 border-white/30 top-1/7 left-1/6 -z-20"></div>
+          <div class="absolute w-auto h-auto md:w-[400px] md:h-[400px] rounded-full border-100 border-white/30 top-1/7 left-1/6 -z-20"></div>
 
-          <div class="absolute w-[900px] h-[900px] rounded-full border-140 border-white/30 top-1/3 left-1/4 -translate-x-[44%] -translate-y-[44%] -z-20"></div>
+          <div class="absolute w-auto h-auto md:w-[900px] md:h-[900px] rounded-full border-140 border-white/30 top-1/3 left-1/4 -translate-x-[44%] -translate-y-[44%] -z-20"></div>
 
-          <div class="absolute w-[1500px] h-[1500px] rounded-full border-160 border-white/30 top-1/3 left-1/4 -translate-x-[44%] -translate-y-[45%] -z-20"></div>
-          <div class="absolute w-[2000px] h-[2000px] rounded-full border-180 border-white/30 top-1/3 left-1/4 -translate-x-[40%] -translate-y-[45%] -z-20"></div>
+          <div class="absolute  w-auto h-auto md:w-[1500px] md:h-[1500px] rounded-full border-160 border-white/30 top-1/3 left-1/4 -translate-x-[44%] -translate-y-[45%] -z-20"></div>
+          <div class="absolute w-auto h-auto md:w-[2000px] md:h-[2000px] rounded-full border-180 border-white/30 top-1/3 left-1/4 -translate-x-[40%] -translate-y-[45%] -z-20"></div>
 
-          <div className=" mx-60 my-5 font-sans font-bold flex flex-col w-1/4 h-[700px] z-20 justify-center items-center">
+          <div className="mx-auto md:mx-60 md:my-20 font-sans font-bold flex flex-col w-1/4 h-[700px] z-20 justify-center items-center">
             <h1
-              className=" h-53 text-[250px] font-extrabold tracking-wide hover:rotate-[-5deg] text-yellow-300 drop-shadow-[9px_7px_0_#1b1b4d] uppercase animate-[popIn_0.5s_ease-out] transition transform hover:scale-110 duration-300"
+              className="md:h-53 text-8xl md:text-[250px] font-extrabold tracking-wide hover:rotate-[-5deg] text-yellow-300 drop-shadow-[9px_7px_0_#1b1b4d] uppercase animate-[popIn_0.5s_ease-out] transition transform hover:scale-110 duration-300"
               style={{
                 fontFamily: "'Luckiest Guy', sans-serif",
                 WebkitTextStroke: "1px #1b1b4d",
@@ -196,7 +199,7 @@ const Home = () => {
               GEO
             </h1>
             <h1
-              className=" font-[Luckiest Guy] h-50 text-[220px] text-gray-100 drop-shadow-[9px_7px_0_#1b1b4d] uppercase tracking-wide animate-[popIn_0.9s_ease-out] transition transform hover:scale-110 duration-300"
+              className=" font-[Luckiest Guy] md:h-50 text-7xl md:text-[220px] text-gray-100 drop-shadow-[9px_7px_0_#1b1b4d] uppercase tracking-wide animate-[popIn_0.9s_ease-out] transition transform hover:scale-110 duration-300"
               style={{
                 fontFamily: "'Luckiest Guy', sans-serif",
                 WebkitTextStroke: "1px #1b1b4d",
@@ -204,7 +207,7 @@ const Home = () => {
             >
               GUESS
             </h1>
-            <div className=" flex items-center mt-25 ">
+            <div className=" flex items-center mt-2 md:mt-16 ">
               <i
                 className="fa-solid fa-circle-info fa-lg hover:scale-125 transform transition duration-300 cursor-pointer"
                 onClick={() => {
@@ -212,7 +215,7 @@ const Home = () => {
                 }}
               ></i>
               <h1
-                className="ml-2 text-white drop-shadow-md text-3xl  "
+                className="ml-2 text-white drop-shadow-md w-[200px] md:w-auto md:text-3xl  "
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 Can you guess the country ?
@@ -220,7 +223,7 @@ const Home = () => {
             </div>
 
             <button
-              className="group relative mt-10 cursor-pointer bg-white text-purple-700 font-extrabold text-xl px-6 py-3 rounded-full border-4 hover:border-1 shadow-[0_6px_0_#4b0082] hover:bg-[#4b0082] hover:text-white hover:-translate-y-1 active:translate-y-1 active:shadow-[0_3px_0_#4b0082] transition-all duration-300 ease-out"
+              className="group relative w-40 md:w-auto md:mt-10 mt-40 cursor-pointer bg-white text-purple-700 font-extrabold text-xl px-6 py-3 rounded-full border-4 hover:border-1 shadow-[0_6px_0_#4b0082] hover:bg-[#4b0082] hover:text-white hover:-translate-y-1 active:translate-y-1 active:shadow-[0_3px_0_#4b0082] transition-all duration-300 ease-out"
               onClick={handlePlay}
             >
               <i className="fa-solid fa-play group-hover:scale-130"></i> PLAY
@@ -228,14 +231,14 @@ const Home = () => {
           </div>
 
           <div
-            className="absolute bottom-2 w-[20%] h-[25%] items-center flex flex-col justify-center right-4 bg-gradient-to-br from-white/20 to-black/10 backdrop-blur-sm border border-white/50 text-white  rounded-2xl shadow-xl space-y-3 text-xl"
+            className="absolute bottom-0 md:bottom-2 w-full h-[15%] md:w-[20%] md:h-[25%] items-center flex flex-col justify-center md:right-4 bg-gradient-to-br from-white/20 to-black/10 backdrop-blur-sm border border-white/50 text-white  rounded-2xl shadow-xl space-y-3 text-sm md:text-xl"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            <div className="flex w-1/2 items-center gap-2">
+            <div className="flex w-1/3 md:w-1/2 items-center gap-2">
               <i class="fa-solid fa-earth-americas"></i>
               <span>195 countries</span>
             </div>
-            <div className="flex w-1/2 items-center gap-2">
+            <div className="flex w-1/3 md:w-1/2 items-center gap-2">
               <i class="fa-solid fa-user"></i>
               <span>1000+ players</span>
             </div>
@@ -247,7 +250,7 @@ const Home = () => {
         </div>
         <div className="relative z-0 ">
           <svg
-            className="block w-screen h-26"
+            className="block w-screen md:h-26"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
@@ -279,96 +282,108 @@ const Home = () => {
 
         <div
           ref={containerRef}
-          className="relative w-screen h-screen bg-[#F5F5F5]"
+          className="relative w-full h-auto md:h-screen bg-[#F5F5F5]"
         >
-          <div className="absolute flex justify-center gap-130 w-full h-full ">
+          <div className="absolute flex flex-wrap justify-center gap-130 w-full h-full z-10 ">
             <img className="w-[500px] h-[500px] " src={sparkles} alt="" />
-            <img className=" w-[500px] h-[500px] " src={sparkles} alt="" />
+            <img
+              className="hidden md:block md:w-[500px] md:h-[500px] "
+              src={sparkles}
+              alt=""
+            />
           </div>
+          <div className="hidden md:block">
           <img
             ref={img1Ref}
-            className="absolute  left-50 top-150 w-[225px] drop-shadow-2xl "
+            className="absolute md:left-50 top-150 w-[225px] drop-shadow-2xl  "
             src={img1}
             alt=""
           />
           <img
             ref={img2Ref}
-            className="absolute right-60 rotate-[50deg] drop-shadow-2xl "
+            className="absolute md:right-60 rotate-[50deg] drop-shadow-2xl "
             src={img2}
             alt=""
           />
           <img
             ref={img6Ref}
-            className="absolute right-45  top-120 w-[170px] z-5 drop-shadow-2xl "
+            className="absolute md:right-45  top-120 w-[170px] z-5 drop-shadow-2xl "
             src={img6}
             alt=""
           />
           <img
             ref={img4Ref}
-            className="absolute right-70 top-140 w-[150px] z-10 drop-shadow-2xl "
+            className="absolute md:right-70 top-140 w-[150px] z-10 drop-shadow-2xl "
             src={img4}
             alt=""
           />
           <img
             ref={img5Ref}
-            className="absolute top-100 left-50 rotate-[10deg] drop-shadow-2xl "
+            className="absolute top-100 md:left-50 rotate-[10deg] drop-shadow-2xl "
             src={img5}
             alt=""
           />
           <img
             ref={img3Ref}
-            className="absolute left-30 top-30 w-[225px] -rotate-[25deg] drop-shadow-2xl "
+            className="absolute md:left-30 top-30 w-[225px] -rotate-[25deg] drop-shadow-2xl "
             src={img3}
             alt=""
           />
+          </div>
 
-          <Leadmini />
+          <Leadmini className="z-0" />
         </div>
 
         <footer
-          className="bg-gray-200 text-black text-sm p-6 text-center shadow-inner "
+          className="relative bg-gray-200 text-black text-sm p-6 text-center shadow-inner "
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
-          <div className="absolute left-100 drop-shadow-2xl w-[300px]">
+          <div className="absolute top-15  -left-4 md:left-100 drop-shadow-2xl w-1/2 md:w-[300px]">
             <img src={Cartoon} alt="" />
           </div>
           {!submitted ? (
             <form
               onSubmit={handleSubmit}
-              className="mt-4 space-y-2 max-w-md mx-auto"
+              className="relative mt-4 space-y-2 w-full max-w-md mx-auto"
             >
               <h1
-                className="text-2xl font-bold font-sans"
+                className="text-2xl font-bold font-sans mb-5"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 FEEDBACK
               </h1>
-              <textarea
-                className="w-full h-30 p-2 rounded-lg border-2 border-purple-500 focus:outline-none hover:border-purple-700"
-                placeholder="Any feedbacks on the game.."
-                value={feedback}
-                onChange={(e) => {
-                  setFeedback(e.target.value);
-                }}
-              />
-              {error && <div className="text-red-500 text-sm">{error}</div>}
-              <button
-                type="submit"
-                className="bg-gradient-to-r from-purple-700 to-purple-400 shadow-2xl rounded-md px-2 py-1 text-white cursor-pointer hover:scale-105 transition-all duration-200 ease-in-out active:scale-95 active:translate-y-0.5"
-              >
-                Submit
-              </button>
+              <div className="flex justify-end">
+                <textarea
+                  className="  w-[65%] md:w-full h-30 p-2 rounded-lg border-2 border-purple-500 focus:outline-none hover:border-purple-700"
+                  placeholder="Any feedbacks on the game.."
+                  value={feedback}
+                  onChange={(e) => {
+                    setFeedback(e.target.value);
+                  }}
+                />
+              </div>
+             
+              <div className=" relative flex justify-center left-[42%] md:left-0 w-1/2 md:w-full">
+                {" "}
+                <button
+                  type="submit"
+                  className="bg-gradient-to-r from-purple-700 to-purple-400 shadow-2xl rounded-md px-2 py-1 text-white cursor-pointer hover:scale-105 transition-all duration-200 ease-in-out active:scale-95 active:translate-y-0.5"
+                >
+                  Submit
+                </button>
+              </div>
+               {error && <div className="text-red-500 mt-5 text-sm">{error}</div>}
             </form>
           ) : (
             <div className="text-green-500 font-semibold mt-4">
               Thanks for your feedback!
             </div>
           )}
-          <div className="text-2xl font-bold mb-2 flex justify-center items-center gap-2 mt-5">
+          <div className="text-xl md:text-2xl font-bold mb-2 flex justify-center items-center gap-2 mt-5">
             <span className="tracking-wider">GeoGuess</span> | © 2025 VivekNegi
           </div>
           <div className="text-gray-400">
-            Made with using React, Node.js & MongoDB
+            Made using React, Node.js & MongoDB
           </div>
         </footer>
       </div>

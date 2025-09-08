@@ -1,5 +1,5 @@
  
-import React, { useState } from "react";
+import  { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HOME from "./Pages/Home";
@@ -12,7 +12,7 @@ import Game from "./Pages/Game";
 function App() {
 
   const [signModal, setsignModal] = useState(false); 
-  const [start, setStart] =useState(false);
+  
   
 
 

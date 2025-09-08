@@ -21,23 +21,25 @@ const Nav = ({ onSignUpClick }) => {
   const handletransition = () => {
     switch (activeTab) {
       case "home":
-        return "translate-x-6 w-1/10"
+        return "translate-x-6 w-1/10";
       case "leaderboard":
         return "translate-x-[89%] w-1/5";
       default:
-        return "opacity-0 pointer-events-none scale-0" ;
+        return "opacity-0 pointer-events-none scale-0";
     }
   };
 
   return (
-    <div className=" navbar w-screen flex justify-end  ">
-      <div className="absolute h-16 w-1/3 z-20   flex justify-center gap-10 mt-4">
+    <div className=" navbar w-full flex justify-end  ">
+      <div className="absolute h-16 w-full lg:w-1/3 z-20 flex justify-center md:gap-10 gap-4 mt-4">
         <div className="  rounded-xl p-4 mt-2 ">
           <hr
-            className={`transition-transform duration-300 border-purple-600 border-t-3 absolute top-12 left-[17.5%] ${handletransition()}`}
+            className={` hidden md:block transition-transform duration-300 border-purple-600 border-t-3 absolute top-12  left-[17.5%] ${handletransition()}`}
           />
-          <div className="flex justify-center gap-5 items-center text-white font-semibold  "
-           style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <div
+            className="flex justify-center gap-5 items-center text-white font-semibold  "
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
             <Link to="/" className="relative group w-[80px] text-center">
               <span
                 className={`block transition-opacity duration-200 group-hover:opacity-0 ${
@@ -75,7 +77,7 @@ const Nav = ({ onSignUpClick }) => {
             <button
               className=" bg-gradient-to-r from-white to-white shadow-2xl rounded-full border-2 border-purple-600 px-4 py-1.5 text-purple-700 text-md font-semibold cursor-pointer hover:scale-105 hover:from-purple-600 hover:to-purple-400 hover:text-white transition-all duration-300 ease-in-out active:scale-95 active:translate-y-1.5"
               onClick={onSignUpClick}
-               style={{ fontFamily: "'Poppins', sans-serif" }}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               Sign Up
             </button>
