@@ -38,6 +38,8 @@ const Home = () => {
   const img5Ref = useRef(null);
   const img6Ref = useRef(null);
 
+  const [isFullScreen, setIsFullScreen] = useState(window.innerWidth >= 1024);
+
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -101,6 +103,13 @@ const Home = () => {
     );
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsFullScreen(window.innerWidth >= 1024);
+    };
+    window.addEventListener("resize", handleResize);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -115,7 +124,7 @@ const Home = () => {
         }
       );
 
-      if (response.ok) {
+      if (response.status === 200 || response.status === 201) {
         setSubmitted(true);
       }
     } catch (err) {
@@ -170,7 +179,11 @@ const Home = () => {
             } `}
           >
             <Canvas camera={{ position: [0, 0, 3], fov: 75 }}>
-              <Earth fastSpin={fastSpin} move={move} isBouncing={isBouncing} />
+              <Earth
+                fastSpin={fastSpin}
+                isBouncing={isBouncing}
+                {...(isFullScreen ? { move: move } : {})}
+              />
             </Canvas>
           </div>
 
@@ -293,42 +306,42 @@ const Home = () => {
             />
           </div>
           <div className="hidden md:block">
-          <img
-            ref={img1Ref}
-            className="absolute md:left-50 top-150 w-[225px] drop-shadow-2xl  "
-            src={img1}
-            alt=""
-          />
-          <img
-            ref={img2Ref}
-            className="absolute md:right-60 rotate-[50deg] drop-shadow-2xl "
-            src={img2}
-            alt=""
-          />
-          <img
-            ref={img6Ref}
-            className="absolute md:right-45  top-120 w-[170px] z-5 drop-shadow-2xl "
-            src={img6}
-            alt=""
-          />
-          <img
-            ref={img4Ref}
-            className="absolute md:right-70 top-140 w-[150px] z-10 drop-shadow-2xl "
-            src={img4}
-            alt=""
-          />
-          <img
-            ref={img5Ref}
-            className="absolute top-100 md:left-50 rotate-[10deg] drop-shadow-2xl "
-            src={img5}
-            alt=""
-          />
-          <img
-            ref={img3Ref}
-            className="absolute md:left-30 top-30 w-[225px] -rotate-[25deg] drop-shadow-2xl "
-            src={img3}
-            alt=""
-          />
+            <img
+              ref={img1Ref}
+              className="absolute md:left-50 top-150 w-[225px] drop-shadow-2xl  "
+              src={img1}
+              alt=""
+            />
+            <img
+              ref={img2Ref}
+              className="absolute md:right-60 rotate-[50deg] drop-shadow-2xl "
+              src={img2}
+              alt=""
+            />
+            <img
+              ref={img6Ref}
+              className="absolute md:right-45  top-120 w-[170px] z-5 drop-shadow-2xl "
+              src={img6}
+              alt=""
+            />
+            <img
+              ref={img4Ref}
+              className="absolute md:right-70 top-140 w-[150px] z-10 drop-shadow-2xl "
+              src={img4}
+              alt=""
+            />
+            <img
+              ref={img5Ref}
+              className="absolute top-100 md:left-50 rotate-[10deg] drop-shadow-2xl "
+              src={img5}
+              alt=""
+            />
+            <img
+              ref={img3Ref}
+              className="absolute md:left-30 top-30 w-[225px] -rotate-[25deg] drop-shadow-2xl "
+              src={img3}
+              alt=""
+            />
           </div>
 
           <Leadmini className="z-0" />
@@ -338,7 +351,7 @@ const Home = () => {
           className="relative bg-gray-200 text-black text-sm p-6 text-center shadow-inner "
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
-          <div className="absolute top-15  -left-4 md:left-100 drop-shadow-2xl w-1/2 md:w-[300px]">
+          <div className={`absolute top-15 -left-4 md:left-100 drop-shadow-2xl w-1/2 md:w-[300px] ${!submitted ? "block" : "hidden"}`}>
             <img src={Cartoon} alt="" />
           </div>
           {!submitted ? (
@@ -362,17 +375,19 @@ const Home = () => {
                   }}
                 />
               </div>
-             
+
               <div className=" relative flex justify-center left-[42%] md:left-0 w-1/2 md:w-full">
                 {" "}
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-purple-700 to-purple-400 shadow-2xl rounded-md px-2 py-1 text-white cursor-pointer hover:scale-105 transition-all duration-200 ease-in-out active:scale-95 active:translate-y-0.5"
+                  className="bg-gradient-to-r from-purple-700 to-purple-400 shadow-2xl rounded-md px-2 py-1 text-white cursor-pointer hover:scale-105 transition-all duration-200 ease-in-out active:scale-95   active:translate-y-0.5"
                 >
                   Submit
                 </button>
               </div>
-               {error && <div className="text-red-500 mt-5 text-sm">{error}</div>}
+              {error && (
+                <div className="text-red-500 mt-5 text-sm">{error}</div>
+              )}
             </form>
           ) : (
             <div className="text-green-500 font-semibold mt-4">

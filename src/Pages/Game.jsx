@@ -116,7 +116,7 @@ const Game = () => {
   };
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="h-screen w-full">
       {gameOver ? (
         <div className="flex flex-col items-center justify-center min-h-screen">
           <h1 className="text-4xl font-bold mb-4">🎉 Game Over 🎉</h1>
@@ -135,7 +135,7 @@ const Game = () => {
         </div>
       ) : (
         <div
-          className={`flex justify-center relative bg-[radial-gradient(circle_at_center,_#fef08a,_#FDD637,_#f4ad1c)] min-h-screen w-full z-12  `}
+          className={`flex relative bg-[radial-gradient(circle_at_center,_#fef08a,_#FDD637,_#f4ad1c)] h-screen w-full z-12  `}
           style={{ fontFamily: "'Poppins', sans-serif" }}
         >
           <div>
@@ -145,7 +145,10 @@ const Game = () => {
               alt="Background"
             />
           </div>
-          <div className="relative flex flex-col justify-center items-center w-full lg:w-[80%] h-[80%] p-4 z-10 mt-0 md:mt-0 ">
+          <div className="relative flex flex-col justify-center items-center w-full p-4 z-10 ">
+            <div className="md:hidden block w-full h-8">
+
+            </div>
             <div className="relative flex justify-center items-center gap-1 ">
               <div
                 className="text-3xl md:text-4xl font-bold md:mb-6"
@@ -162,20 +165,20 @@ const Game = () => {
               </div>
             </div>
 
-            <div className="w-[80%] md:w-[20%] aspect-square bg-white rounded-xl p-6 shadow-2xl mb-6 flex items-center justify-center">
+            <div className="w-[70%] md:w-[20%] aspect-square bg-white rounded-xl p-6 shadow-2xl mb-6 flex items-center justify-center">
               <img
                 src={`${process.env.REACT_APP_BACKEND_URL}${country.outline}`}
                 alt=" "
                 className="w-full h-full object-contain"
               />
             </div>
-            <div className="w-1/2 flex justify-center">
+            <div className="w-1/2  flex justify-center">
               <input
                 type="text"
                 placeholder="Guess the country"
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
-                className={`text-black md:w-1/2 p-4 border-2 border-white rounded-lg text-xl shadow-2xl focus:outline-none transition-all duration-300 ${
+                className={`text-black md:w-1/2 h-12 p-4 md:border-2 md:border-white rounded-lg text-xl shadow-2xl focus:outline-none transition-all duration-300 ${
                   status === "correct, well done!"
                     ? "border-2 border-green-500 shadow-lg"
                     : ""
@@ -203,10 +206,9 @@ const Game = () => {
             >
               Submit
             </button>
-           
-            <div className="relative flex justify-center w-[90%] md:w-1/2 gap-4 md:gap-50">
 
-              <div className="mt-5 md:mt-10 w-[60%] md:w-1/3 md:text-xl flex justify-center font-semibold">
+            <div className="relative flex justify-center w-full md:w-1/2 gap-4 md:gap-50">
+              <div className="mt-5 md:mt-10 w-[70%] md:w-1/3 md:text-xl flex justify-center font-semibold">
                 Tries left: {triesLeft}{" "}
                 <img
                   className="h-7 w-7 hover:scale-110 "
@@ -215,23 +217,24 @@ const Game = () => {
                 />
               </div>
 
-              <div className="mt-5 md:mt-7 text-black p-2 md:p-4 rounded-lg w-[60%] flex justify-center md:w-1/3">
+              <div className="mt-5 text-black p-2 md:p-4 rounded-lg  flex flex-col justify-center w-1/3">
                 {hintIndex < hintFields.length - 1 && (
                   <>
                     <button
                       onClick={() => setHintIndex((prev) => prev + 1)}
-                      className="  p-2 bg-gradient-to-r from-purple-800 to-purple-500 rounded-lg text-white cursor-pointer shadow-2xl active:shadow-md  hover:scale-105 transition-all duration-300  active:translate-y-2 z-10"
+                      className=" w-full h-full md:w-[20px] p-2 bg-gradient-to-r from-purple-800 to-purple-500 rounded-lg text-white cursor-pointer shadow-2xl active:shadow-md  hover:scale-105 transition-all duration-300  active:translate-y-2 z-10"
                     >
                       Show Hint
                     </button>
                   </>
                 )}
-                <ul className=" list-inside">
+                <ul className="h-[20%] text-sm md:text-xl list-inside ">
                   {hintFields.slice(0, hintIndex + 1).map((field, index) => (
                     <li key={index}>
                       <strong>{field}:</strong>
                       {field === "flag" ? (
                         <img
+                          className="w-1/2 "
                           src={country.flag}
                           width="150"
                           alt="Country Flag"

@@ -31,7 +31,7 @@ const Nav = ({ onSignUpClick }) => {
 
   return (
     <div className=" navbar w-full flex justify-end  ">
-      <div className="absolute h-16 w-full lg:w-1/3 z-20 flex justify-center md:gap-10 gap-4 mt-4">
+      <div className="absolute h-16 w-full lg:w-1/3 z-20 flex justify-center md:gap-10 gap-2 mt-4">
         <div className="  rounded-xl p-4 mt-2 ">
           <hr
             className={` hidden md:block transition-transform duration-300 border-purple-600 border-t-3 absolute top-12  left-[17.5%] ${handletransition()}`}
