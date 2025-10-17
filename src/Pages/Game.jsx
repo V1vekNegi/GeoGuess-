@@ -222,7 +222,7 @@ const Game = () => {
                   <>
                     <button
                       onClick={() => setHintIndex((prev) => prev + 1)}
-                      className=" w-full h-full md:w-[20vmax] p-2 bg-gradient-to-r from-purple-800 to-purple-500 rounded-lg text-white cursor-pointer shadow-2xl active:shadow-md  hover:scale-105 transition-all duration-300  active:translate-y-2 z-10"
+                      className=" w-full h-full  p-2 bg-gradient-to-r from-purple-800 to-purple-500 rounded-lg text-white cursor-pointer shadow-2xl active:shadow-md  hover:scale-105 transition-all duration-300  active:translate-y-2 z-10"
                     >
                       Show Hint
                     </button>
